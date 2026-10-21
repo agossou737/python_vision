@@ -1,0 +1,23 @@
+# ============================================================
+# Vision Desktop — dépendances
+# Python 3.10+ recommandé (3.11 testé visé). Tkinter n'est PAS listé :
+# il est fourni par le système (voir README : sudo apt install python3-tk).
+# ============================================================
+
+# --- Obligatoires (cœur de l'application) ---
+numpy>=1.26
+opencv-python>=4.9,<5          # capture vidéo + dessin ; (opencv-python-headless pour CI sans écran)
+Pillow>=10.3                   # conversion image -> ImageTk.PhotoImage
+customtkinter>=5.2.2           # interface moderne basée sur Tkinter
+
+# --- Détection (Phase 2) ---
+# ultralytics installe torch automatiquement. Sur CPU seul, installer d'abord torch CPU
+# (voir README) afin d'éviter de télécharger les builds CUDA volumineux.
+ultralytics>=8.3
+
+# --- Optionnelles ---
+# torchvision>=0.18            # requis uniquement pour le détecteur Faster R-CNN (Phase 4)
+# pyinstaller>=6.6             # packaging en exécutable (Phase 4)
+
+# --- Développement / tests ---
+pytest>=8.0
