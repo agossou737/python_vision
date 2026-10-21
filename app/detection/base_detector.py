@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 from abc import ABC, abstractmethod
-from typing import List
+from typing import Any, List
 
 import numpy as np
 
@@ -20,6 +20,17 @@ class ModelLoadError(DetectionError):
 
 class InferenceError(DetectionError):
     """Échec pendant l'inférence."""
+
+
+def to_numpy(value: Any) -> np.ndarray:
+    """Convertit un tenseur torch (éventuellement sur GPU) ou une liste en ndarray."""
+    if hasattr(value, "detach"):
+        value = value.detach()
+    if hasattr(value, "cpu"):
+        value = value.cpu()
+    if hasattr(value, "numpy"):
+        value = value.numpy()
+    return np.asarray(value)
 
 
 def resolve_device(requested: str = "auto") -> str:
@@ -54,7 +65,7 @@ class BaseDetector(ABC):
     @property
     @abstractmethod
     def class_names(self) -> List[str]:
-        """Noms des classes, indexés par class_id."""
+        """Noms des classes proposées dans le filtre de l'interface (hors « arrière-plan »)."""
 
     @property
     def device(self) -> str:

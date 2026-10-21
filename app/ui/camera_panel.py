@@ -44,7 +44,13 @@ SMARTPHONE_METHODS: Dict[str, str] = {
     "Application Wi-Fi (IP Webcam / DroidCam)": "ip_app",
     "ADB forward (USB, service vidéo requis)": "adb_forward",
 }
-MODEL_CHOICES = ["yolov8n.pt", "yolov8s.pt", "yolo11n.pt"]
+MODEL_CHOICES = [
+    "yolov8n.pt",
+    "yolov8s.pt",
+    "yolo11n.pt",
+    "fasterrcnn_mobilenet_v3_large_320_fpn",
+    "fasterrcnn_resnet50_fpn_v2",
+]
 IMGSZ_CHOICES = ["320", "416", "640", "960", "1280"]
 
 

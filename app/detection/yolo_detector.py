@@ -9,18 +9,10 @@ from typing import Any, List, Optional, Union
 import numpy as np
 
 from app.detection.base_detector import BaseDetector, ModelLoadError, resolve_device
+from app.detection.base_detector import to_numpy as _to_numpy
 from app.detection.types import Detection
 
 logger = logging.getLogger(__name__)
-
-
-def _to_numpy(value: Any) -> np.ndarray:
-    """Convertit un tenseur torch (éventuellement sur GPU) ou une liste en ndarray."""
-    if hasattr(value, "cpu"):
-        value = value.cpu()
-    if hasattr(value, "numpy"):
-        value = value.numpy()
-    return np.asarray(value)
 
 
 def parse_yolo_result(result: Any, frame_shape: tuple, fallback_names: List[str]) -> List[Detection]:

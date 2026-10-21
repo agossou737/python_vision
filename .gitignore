@@ -13,3 +13,5 @@ assets/models/*.onnx
 config/settings.local.json
 .idea/
 .vscode/
+assets/models/torch/
+!assets/models/.gitkeep

@@ -1,23 +1,29 @@
 # ============================================================
 # Vision Desktop — dépendances
-# Python 3.10+ recommandé (3.11 testé visé). Tkinter n'est PAS listé :
-# il est fourni par le système (voir README : sudo apt install python3-tk).
+#
+# Python : 3.10 à 3.13 recommandé (développé et testé en 3.12 et 3.13).
+#          Python 3.14 : NON validé (les roues PyTorch/OpenCV peuvent manquer).
+# Tkinter n'est PAS listé : il est fourni par le système
+#   Ubuntu : sudo apt install python3-tk      Windows : coché dans l'installeur Python.
+#
+# SANS GPU NVIDIA : installez d'abord PyTorch en version CPU (voir README), puis ce fichier :
+#   pip install torch torchvision --index-url https://download.pytorch.org/whl/cpu
+#   pip install -r requirements.txt
 # ============================================================
 
 # --- Obligatoires (cœur de l'application) ---
 numpy>=1.26
-opencv-python>=4.9,<5          # capture vidéo + dessin ; (opencv-python-headless pour CI sans écran)
+opencv-python>=4.9,<5          # capture vidéo + dessin (opencv-python-headless pour CI sans écran)
 Pillow>=10.3                   # conversion image -> ImageTk.PhotoImage
 customtkinter>=5.2.2           # interface moderne basée sur Tkinter
 
-# --- Détection (Phase 2) ---
-# ultralytics installe torch automatiquement. Sur CPU seul, installer d'abord torch CPU
-# (voir README) afin d'éviter de télécharger les builds CUDA volumineux.
+# --- Détection YOLO ---
+# ultralytics installe PyTorch automatiquement s'il est absent (build CUDA volumineux sous Linux).
 ultralytics>=8.3
 
 # --- Optionnelles ---
-# torchvision>=0.18            # requis uniquement pour le détecteur Faster R-CNN (Phase 4)
-# pyinstaller>=6.6             # packaging en exécutable (Phase 4)
+# torchvision>=0.15            # requis pour le détecteur Faster R-CNN (déjà installé avec ultralytics)
+# pyinstaller>=6.6             # génération de l'exécutable : python tools/build_exe.py
 
 # --- Développement / tests ---
 pytest>=8.0

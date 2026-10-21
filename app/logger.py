@@ -46,7 +46,8 @@ def setup_logging(
     except OSError as exc:  # dossier non inscriptible : on continue en console
         print(f"[logger] Impossible de créer le fichier de log : {exc}", file=sys.stderr)
 
-    if console:
+    # Exécutable « fenêtré » (Windows) : sys.stderr vaut None, pas de sortie console.
+    if console and sys.stderr is not None:
         stream = logging.StreamHandler()
         stream.setFormatter(formatter)
         logger.addHandler(stream)

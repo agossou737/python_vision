@@ -10,11 +10,12 @@ from dataclasses import asdict, dataclass, field, fields
 from pathlib import Path
 from typing import Any, Dict, List, Type, TypeVar, Union
 
+from app.paths import app_dir
 from app.utils.validators import clamp
 
 logger = logging.getLogger(__name__)
 
-PROJECT_ROOT = Path(__file__).resolve().parent.parent
+PROJECT_ROOT = app_dir()  # racine du projet, ou dossier de l'exécutable PyInstaller
 DEFAULT_CONFIG_PATH = PROJECT_ROOT / "config" / "settings.json"
 
 T = TypeVar("T")
