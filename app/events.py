@@ -19,6 +19,7 @@ class EventKind(str, Enum):
     SIGNAL_LOST = "signal_lost"
     RECONNECTING = "reconnecting"
     ERROR = "error"
+    INFERENCE_ERROR = "inference_error"
     STOPPED = "stopped"
 
 
