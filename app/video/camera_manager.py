@@ -108,19 +108,23 @@ class CameraManager:
             return self._stop_locked(wait, timeout)
 
     def _stop_locked(self, wait: bool, timeout: float) -> bool:
-        worker, self._worker = self._worker, None
+        worker = self._worker
         if worker is None:
             return True
         worker.request_stop()
-        if wait:
-            worker.join(timeout)
-            if worker.is_alive():
-                logger.warning(
-                    "Le worker de capture ne s'est pas arrêté en %.1f s (lecture bloquante ?).",
-                    timeout,
-                )
-                return False
-        return not worker.is_alive()
+        if not wait:
+            # Non bloquant : on GARDE la référence tant que le thread vit, afin que
+            # ``is_running`` reste vrai jusqu'à la libération effective de la caméra.
+            return not worker.is_alive()
+        worker.join(timeout)
+        alive = worker.is_alive()
+        if alive:
+            logger.warning(
+                "Le worker de capture ne s'est pas arrêté en %.1f s (lecture bloquante ?).",
+                timeout,
+            )
+        self._worker = None
+        return not alive
 
     def shutdown(self) -> None:
         """Nettoyage centralisé à la fermeture de l'application."""

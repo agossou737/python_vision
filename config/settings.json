@@ -1,0 +1,37 @@
+{
+  "appearance": {
+    "theme": "dark",
+    "color_theme": "blue"
+  },
+  "video": {
+    "source_type": "local",
+    "camera_index": 0,
+    "stream_url": "",
+    "connect_timeout_s": 5.0,
+    "auto_reconnect": true,
+    "reconnect_initial_delay_s": 1.0,
+    "reconnect_max_delay_s": 15.0,
+    "reconnect_max_attempts": 0,
+    "max_consecutive_read_failures": 30,
+    "frame_queue_size": 2,
+    "scan_max_index": 5,
+    "smartphone_method": "ip_app",
+    "adb_local_port": 8080,
+    "adb_remote_port": 8080,
+    "adb_stream_path": "/video"
+  },
+  "detection": {
+    "model_name": "yolo11n.pt",
+    "confidence": 0.85,
+    "imgsz": 640,
+    "frame_skip": 0,
+    "enabled_classes": [],
+    "show_boxes": true,
+    "show_labels": true,
+    "device": "auto"
+  },
+  "paths": {
+    "models_dir": "assets/models",
+    "logs_dir": "logs"
+  }
+}
